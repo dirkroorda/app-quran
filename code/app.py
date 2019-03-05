@@ -166,6 +166,7 @@ class TfApp(object):
     otypeRank = api.otypeRank
     maxSlot = F.otype.maxSlot
     eoslots = E.oslots.data
+    isHtml = options.get('fmt', None) in app.textFormats
 
     bigType = False
     if nType in SECTION | ALT_SECTION:
@@ -225,7 +226,8 @@ class TfApp(object):
       heading = ''
       occs = ''
       if nType == slotType:
-        text = htmlEsc(T.text([n], fmt=d.fmt))
+        text = T.text([n], fmt=d.fmt)
+        text = text if isHtml else htmlEsc(text)
         tClass = 'ar' if d.fmt is None or '-orig-' in d.fmt else 'tr'
         heading = f'<div class="{tClass}">{text}</div>'
         featurePart = getFeatures(
