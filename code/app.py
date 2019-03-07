@@ -1,4 +1,4 @@
-from tf.core.helpers import htmlEsc, mdEsc
+from tf.core.helpers import mdhtmlEsc, htmlEsc
 from tf.applib.helpers import dh
 from tf.applib.display import prettyPre, getFeatures
 from tf.applib.highlight import hlText, hlRep
@@ -82,13 +82,13 @@ class TfApp(object):
     if nType == 'word':
       rep = hlText(app, [n], d.highlights, fmt=d.fmt)
     elif nType in SECTION:
-      if secLabel:
+      if secLabel and d.withPassage:
         label = ('{}' if nType == SURA else '{}:{}')
         rep = label.format(*T.sectionFromNode(n))
       else:
         rep = ''
       isText = False
-      rep = mdEsc(htmlEsc(rep))
+      rep = mdhtmlEsc(rep)
       rep = hlRep(app, rep, n, d.highlights)
       if nType == AYA:
         if isLinked:
@@ -99,7 +99,7 @@ class TfApp(object):
         isText = True
     elif nType in ALT_SECTION:
       label = f'{F.otype.v(n)} {F.number.v(n)}'
-      rep = mdEsc(htmlEsc(label))
+      rep = mdhtmlEsc(label)
       rep = f'<span class="vn">{rep}</span>'
       rep = hlRep(app, rep, n, d.highlights)
       rep = f'{rep}<br/>'
@@ -108,7 +108,7 @@ class TfApp(object):
           rep += f'<span class="arb">{app.plain(aya, _asString=True, **options)}</span><br/>'
         # rep += hlText(app, L.d(n, otype='word'), d.highlights, fmt=d.fmt)
     elif nType == 'lex':
-      rep = mdEsc(htmlEsc(F.lemma.v(n)))
+      rep = mdhtmlEsc(F.lemma.v(n))
       rep = hlRep(app, rep, n, d.highlights)
     else:
       rep = hlText(app, L.d(n, otype='word'), d.highlights, fmt=d.fmt)
@@ -201,7 +201,7 @@ class TfApp(object):
         passage = app.webLink(n, _asString=True)
       else:
         label = f'{F.otype.v(n)} {F.number.v(n)}'
-        rep = mdEsc(htmlEsc(label))
+        rep = mdhtmlEsc(label)
         rep = f'<span class="vn">{rep}</span>'
         passage = app.webLink(n, text=rep, _asString=True)
       featurePart = getFeatures(

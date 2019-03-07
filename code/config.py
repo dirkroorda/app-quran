@@ -72,6 +72,8 @@ FONT_NAME = 'AmiriQuran'
 FONT = 'AmiriQuran.ttf'
 FONTW = 'AmiriQuran.woff2'
 
+TEXT_FORMATS = {}
+
 BROWSE_NAV_LEVEL = 1
 BROWSE_CONTENT_PRETTY = False
 
