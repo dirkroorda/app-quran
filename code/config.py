@@ -12,7 +12,7 @@ OPTIONS = ()
 ORG = 'q-ran'
 REPO = 'quran'
 CORPUS = 'Quran'
-VERSION = '0.2'
+VERSION = '0.3'
 RELATIVE = 'tf'
 
 DOI_TEXT = '10.5281/zenodo.2532177'
@@ -23,7 +23,7 @@ DOC_INTRO = 'features.md'
 CHAR_URL = '{tfDoc}/Writing/Arabic'
 CHAR_TEXT = 'Arabic characters and transcriptions',
 
-FEATURE_URL = f'{DOC_URL}/features-{{version}}.md#{{feature}}'
+FEATURE_URL = f'{DOC_URL}/features.md#{{feature}}'
 
 MODULE_SPECS = ()
 
