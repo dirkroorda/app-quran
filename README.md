@@ -2,6 +2,8 @@
 
 # Quran
 
+[![DOI](https://zenodo.org/badge/164198445.svg)](https://zenodo.org/badge/latestdoi/164198445)
+
 This is a
 [Text-Fabric](https://githubv.com/annotation/text-fabric) app
 for working with the
