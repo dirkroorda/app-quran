@@ -2,6 +2,8 @@
 
 # Quran
 
+[![sha](sha.png) Software Heritage Archive](https://archive.softwareheritage.org/browse/origin/https://github.com/annotation/app-quran/)
+
 [![DOI](https://zenodo.org/badge/164198445.svg)](https://zenodo.org/badge/latestdoi/164198445)
 
 This is a
