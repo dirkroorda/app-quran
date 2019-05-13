@@ -12,7 +12,7 @@ OPTIONS = ()
 ORG = 'q-ran'
 REPO = 'quran'
 CORPUS = 'Quran'
-VERSION = '0.3'
+VERSION = '0.4'
 RELATIVE = 'tf'
 
 DOI_TEXT = '10.5281/zenodo.2532177'
