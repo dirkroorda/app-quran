@@ -79,4 +79,4 @@ BROWSE_CONTENT_PRETTY = False
 
 
 def deliver():
-  return (globals(), dirname(abspath(__file__)))
+    return (globals(), dirname(abspath(__file__)))
