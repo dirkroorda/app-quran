@@ -1,21 +1,29 @@
-from tf.core.helpers import mdhtmlEsc, htmlEsc
 from tf.applib.helpers import dh
-from tf.applib.display import prettyPre, getFeatures
-from tf.applib.highlight import hlText, hlRep
 from tf.applib.api import setupApi
 from tf.applib.links import outLink
 
 PLAIN_LINK = "http://tanzil.net/#{sura}:{aya}"
 
-SECTION = {"sura", "aya"}
-SURA = "sura"
-AYA = "aya"
-ALT_SECTION = {"manzil", "sajda", "juz", "ruku", "hizb", "page"}
+
+def notice(app):
+    if int(app.api.TF.version.split(".")[0]) <= 7:
+        print(
+            f"""
+Your Text-Fabric is outdated.
+It cannot load this version of the TF app `{app.appName}`.
+Recommendation: upgrade Text-Fabric to version 8.
+Hint:
+
+    pip3 install --upgrade text-fabric
+
+"""
+        )
 
 
 class TfApp(object):
     def __init__(*args, **kwargs):
         setupApi(*args, **kwargs)
+        notice(args[0])
 
     def webLink(app, n, text=None, className=None, _asString=False, _noUrl=False):
         api = app.api
@@ -50,199 +58,3 @@ class TfApp(object):
         if _asString:
             return result
         dh(result)
-
-    def _plain(
-        app, n, passage, isLinked, _asString, secLabel, **options,
-    ):
-        display = app.display
-        d = display.get(options)
-
-        _asApp = app._asApp
-        api = app.api
-        L = api.L
-        T = api.T
-        F = api.F
-        otypeRank = api.otypeRank
-
-        nType = F.otype.v(n)
-        result = passage
-        if _asApp:
-            nodeRep = f' <a href="#" class="nd">{n}</a> ' if d.withNodes else ""
-        else:
-            nodeRep = f" <i>{n}</i> " if d.withNodes else ""
-
-        isText = d.fmt is None or "-orig-" in d.fmt
-        if nType == "word":
-            rep = hlText(app, [n], d.highlights, fmt=d.fmt)
-        elif nType in SECTION:
-            if secLabel and d.withPassage:
-                label = "{}" if nType == SURA else "{}:{}"
-                rep = label.format(*T.sectionFromNode(n))
-            else:
-                rep = ""
-            isText = False
-            rep = mdhtmlEsc(rep)
-            rep = hlRep(app, rep, n, d.highlights)
-            if nType == AYA:
-                if isLinked:
-                    rep = app.webLink(n, text=rep, className="vn", _asString=True)
-                else:
-                    rep = f'<span class="vn">{rep}</span>'
-                rep += hlText(app, L.d(n, otype="word"), d.highlights, fmt=d.fmt)
-                isText = True
-        elif nType in ALT_SECTION:
-            label = f"{F.otype.v(n)} {F.number.v(n)}"
-            rep = mdhtmlEsc(label)
-            rep = f'<span class="vn">{rep}</span>'
-            rep = hlRep(app, rep, n, d.highlights)
-            rep = f"{rep}<br/>"
-            if (
-                d.condenseType is not None
-                and otypeRank[nType] <= otypeRank[d.condenseType]
-            ):
-                for aya in L.d(n, otype=AYA):
-                    rep += f'<span class="arb">{app.plain(aya, _asString=True, **options)}</span><br/>'
-                # rep += hlText(app, L.d(n, otype='word'), d.highlights, fmt=d.fmt)
-        elif nType == "lex":
-            rep = mdhtmlEsc(F.lemma.v(n))
-            rep = hlRep(app, rep, n, d.highlights)
-        else:
-            rep = hlText(app, L.d(n, otype="word"), d.highlights, fmt=d.fmt)
-
-        if isLinked and not passage and nType != AYA:
-            rep = app.webLink(n, text=rep, _asString=True)
-
-        tClass = "arb" if isText else "trb"
-        tClass = display.formatClass[d.fmt] if isText else "trb"
-        rep = f'<span class="{tClass}">{rep}</span>'
-        result += f"{rep}{nodeRep}"
-
-        if _asString or _asApp:
-            return result
-        dh(result)
-
-    def _pretty(
-        app, n, outer, html, firstSlot, lastSlot, **options,
-    ):
-        display = app.display
-        d = display.get(options)
-
-        goOn = prettyPre(app, n, firstSlot, lastSlot, d)
-        if not goOn:
-            return
-        (
-            slotType,
-            nType,
-            isBigType,
-            className,
-            boundaryClass,
-            hlAtt,
-            nodePart,
-            myStart,
-            myEnd,
-        ) = goOn
-
-        api = app.api
-        F = api.F
-        E = api.E
-        L = api.L
-        T = api.T
-        otypeRank = api.otypeRank
-        maxSlot = F.otype.maxSlot
-        eoslots = E.oslots.data
-        isHtml = options.get("fmt", None) in app.textFormats
-
-        if not d.full:
-            isBigType = False
-            if nType in SECTION | ALT_SECTION:
-                if (
-                    d.condenseType is None
-                    or otypeRank[nType] > otypeRank[d.condenseType]
-                ):
-                    isBigType = True
-            elif (
-                d.condenseType is not None
-                and otypeRank[nType] > otypeRank[d.condenseType]
-            ):
-                isBigType = True
-
-        if isBigType:
-            children = ()
-        elif nType in (SECTION | ALT_SECTION) - {AYA}:
-            children = L.d(n, otype=AYA)
-        elif nType == "lex":
-            children = ()
-        elif nType == slotType:
-            children = ()
-        else:
-            children = L.d(n, otype="word")
-
-        (hlClass, hlStyle) = hlAtt
-
-        doOuter = outer and nType in {slotType, "lex"}
-        if doOuter:
-            html.append('<div class="outeritem">')
-
-        html.append(f'<div class="{className} {boundaryClass} {hlClass}" {hlStyle}>')
-
-        featurePart = ""
-
-        if nType in SECTION | ALT_SECTION:
-            if nType in {AYA, SURA}:
-                passage = app.webLink(n, _asString=True)
-            else:
-                label = f"{F.otype.v(n)} {F.number.v(n)}"
-                rep = mdhtmlEsc(label)
-                rep = f'<span class="vn">{rep}</span>'
-                passage = app.webLink(n, text=rep, _asString=True)
-            featurePart = getFeatures(app, n, (), **options,)
-            html.append(
-                f"""
-    <div class="vl">
-        <div class="vrs">{passage}</div>
-        {nodePart}
-        {featurePart}
-    </div>
-"""
-            )
-        else:
-            if nodePart:
-                html.append(nodePart)
-
-            heading = ""
-            occs = ""
-            if nType == slotType:
-                text = T.text([n], fmt=d.fmt)
-                text = text if isHtml else htmlEsc(text)
-                tClass = "ar" if d.fmt is None or "-orig-" in d.fmt else "tr"
-                heading = f'<div class="{tClass}">{text}</div>'
-                featurePart = getFeatures(
-                    app,
-                    n,
-                    ("lemma", "root", "pos", "posx", "formation", "tense"),
-                    **options,
-                )
-            elif nType == "lex":
-                slots = eoslots[n - maxSlot - 1]
-                extremeOccs = (slots[0], slots[-1])
-                linkOccs = " - ".join(
-                    app.webLink(lo, _asString=True) for lo in extremeOccs
-                )
-                heading = f'<div class="h">{htmlEsc(F.lemma.v(n))}</div>'
-                occs = f'<div class="occs">{linkOccs}</div>'
-                featurePart = getFeatures(app, n, (), **options,)
-            html.append(heading)
-            html.append(featurePart)
-            html.append(occs)
-
-        for ch in children:
-            app._pretty(
-                ch, False, html, firstSlot, lastSlot, **options,
-            )
-        html.append(
-            """
-</div>
-"""
-        )
-        if doOuter:
-            html.append("</div>")
