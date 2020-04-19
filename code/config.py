@@ -63,7 +63,7 @@ TEXT_FORMATS = {}
 BROWSE_NAV_LEVEL = 1
 BROWSE_CONTENT_PRETTY = False
 
-VERSES = None
+VERSE_TYPES = None
 
 LEX = dict(typ="lex", feat="lemma", cls="lex", target="word")
 
@@ -120,13 +120,7 @@ LEVELS = dict(
     word=dict(level=0, flow="col", wrap=False, strectch=False),
 )
 
-INTERFACE_DEFAULTS = dict(
-    withTypes=True,
-    withNodes=False,
-    showFeatures=True,
-    lineNumbers=None,
-    graphics=None,
-)
+INTERFACE_DEFAULTS = dict()
 
 
 def deliver():
