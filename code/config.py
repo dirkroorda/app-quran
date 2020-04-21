@@ -83,41 +83,73 @@ CHILD_TYPE = dict(
 
 SUPER_TYPE = None
 
-PLAIN_TYPES = dict(
-    sura=("{otype} {number}", False),
-    manzil=("{otype} {number}", False),
-    sajda=("{otype} {number}", False),
-    juz=("{otype} {number}", False),
-    ruku=("{otype} {number}", False),
-    hizb=("{otype} {number}", False),
-    page=("{otype} {number}", False),
-    aya=("{otype} {number}", False),
-)
-
-
-PRETTY_TYPES = dict(
-    sura=("{otype} {number}", "", ""),
-    manzil=("{otype} {number}", "", ""),
-    sajda=("{otype} {number}", "", ""),
-    juz=("{otype} {number}", "", ""),
-    ruku=("{otype} {number}", "", ""),
-    hizb=("{otype} {number}", "", ""),
-    page=("{otype} {number}", "", ""),
-    aya=("{otype} {number}", "", ""),
-    word=(True, "lemma root", "pos posx formation tense"),
-)
-
-LEVELS = dict(
-    sura=dict(level=3, flow="col", wrap=False, stretch=False),
-    manzil=dict(level=3, flow="col", wrap=False, strectch=False),
-    sajda=dict(level=3, flow="col", wrap=False, strectch=False),
-    juz=dict(level=3, flow="col", wrap=False, strectch=False),
-    ruku=dict(level=3, flow="col", wrap=False, strectch=False),
-    hizb=dict(level=3, flow="col", wrap=False, strectch=False),
-    page=dict(level=3, flow="col", wrap=False, strectch=False),
-    aya=dict(level=2, flow="col", wrap=False, strectch=False),
-    lex=dict(level=1, flow="col", wrap=False, strectch=False),
-    word=dict(level=0, flow="col", wrap=False, strectch=False),
+TYPE_DISPLAY = dict(
+    sura=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        level=3, flow="col", wrap=False, stretch=False,
+    ),
+    manzil=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    sajda=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    juz=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    ruku=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    hizb=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    page=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        childrenPlain=False,
+        level=3, flow="col", wrap=False, strectch=False,
+    ),
+    aya=dict(
+        template="{otype} {number}",
+        bareFeatures="",
+        features="",
+        level=2, flow="col", wrap=False, strectch=False,
+    ),
+    lex=dict(
+        template=True,
+        bareFeatures="",
+        features="",
+        level=1, flow="col", wrap=False, strectch=False,
+    ),
+    word=dict(
+        template=True,
+        bareFeatures="pos posx",
+        features="lemma root formation tense",
+        level=0, flow="col", wrap=False, strectch=False,
+    ),
 )
 
 INTERFACE_DEFAULTS = dict()
