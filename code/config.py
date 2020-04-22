@@ -26,11 +26,6 @@ MODULE_SPECS = ()
 
 ZIP = [REPO]
 
-BASE_TYPE = "word"
-CONDENSE_TYPE = "aya"
-
-NONE_VALUES = {None, "NA", "none", "unknown"}
-
 STANDARD_FEATURES = """
     number name nameTrans nameAscii name@en type order
     ascii unicode space
@@ -41,113 +36,86 @@ STANDARD_FEATURES = """
     component interjection
 """.strip().split()
 
-EXCLUDED_FEATURES = set()
-
-NO_DESCEND_TYPES = {"lex"}
-
 EXAMPLE_SECTION = f"<code>1:1</code>"
 EXAMPLE_SECTION_TEXT = "1:1"
 
-SECTION_SEP1 = ":"
-SECTION_SEP2 = None
-
-WRITING = "ara"
-WRITING_DIR = "rtl"
-
-FONT_NAME = "AmiriQuran"
-FONT = "AmiriQuran.ttf"
-FONTW = "AmiriQuran.woff2"
-
-TEXT_FORMATS = {}
-
-BROWSE_NAV_LEVEL = 1
-BROWSE_CONTENT_PRETTY = False
-
-VERSE_TYPES = None
-
-LEX = dict(typ="lex", feat="lemma", cls="lex", target="word")
-
-TRANSFORM = None
-
-CHILD_TYPE = dict(
-    sura="aya",
-    manzil="aya",
-    sajda="aya",
-    juz="aya",
-    ruku="aya",
-    hizb="aya",
-    page="aya",
-    aya="group",
-    group="word",
+DATA_DISPLAY = dict(
+    noneValues={None, "NA", "none", "unknown"},
+    sectionSep1=":",
+    sectionSep2=None,
+    writing="ara",
+    writingDir="rtl",
+    fontName="AmiriQuran",
+    font="AmiriQuran.ttf",
+    fontw="AmiriQuran.woff2",
+    textFormats={},
+    browseNavLevel=1,
+    browseContentPretty=False,
 )
-
-SUPER_TYPE = None
 
 TYPE_DISPLAY = dict(
     sura=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
+        children="aya",
         level=3, flow="col", wrap=False, stretch=False,
     ),
     manzil=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     sajda=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     juz=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     ruku=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     hizb=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     page=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
         childrenPlain=False,
+        children="aya",
         level=3, flow="col", wrap=False, strectch=False,
     ),
     aya=dict(
         template="{otype} {number}",
-        bareFeatures="",
-        features="",
+        children="group",
+        condense=True,
         level=2, flow="col", wrap=False, strectch=False,
     ),
     lex=dict(
-        template=True,
-        bareFeatures="",
-        features="",
+        template="{lemma}",
+        lexTarget="word",
         level=1, flow="col", wrap=False, strectch=False,
+    ),
+    group=dict(
+        template="",
+        children="word",
+        level=1, flow="row", wrap=True, strectch=False,
     ),
     word=dict(
         template=True,
-        bareFeatures="pos posx",
+        featuresBare="pos posx",
         features="lemma root formation tense",
+        base=True,
         level=0, flow="col", wrap=False, strectch=False,
     ),
 )
