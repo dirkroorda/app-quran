@@ -40,84 +40,19 @@ EXAMPLE_SECTION = f"<code>1:1</code>"
 EXAMPLE_SECTION_TEXT = "1:1"
 
 DATA_DISPLAY = dict(
-    noneValues={None, "NA", "none", "unknown"},
-    sectionSep1=":",
-    sectionSep2=None,
-    writing="ara",
-    writingDir="rtl",
-    fontName="AmiriQuran",
-    font="AmiriQuran.ttf",
-    fontw="AmiriQuran.woff2",
-    textFormats={},
-    browseNavLevel=1,
-    browseContentPretty=False,
+    noneValues={None, "NA", "none", "unknown"}, sectionSep1=":", writing="ara",
 )
 
 TYPE_DISPLAY = dict(
-    sura=dict(
-        template="{otype} {number}",
-        children="aya",
-        level=3, flow="col", wrap=False, stretch=False,
-    ),
-    manzil=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    sajda=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    juz=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    ruku=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    hizb=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    page=dict(
-        template="{otype} {number}",
-        childrenPlain=False,
-        children="aya",
-        level=3, flow="col", wrap=False, strectch=False,
-    ),
-    aya=dict(
-        template="{otype} {number}",
-        children="group",
-        condense=True,
-        level=2, flow="col", wrap=False, strectch=False,
-    ),
-    lex=dict(
-        template="{lemma}",
-        lexTarget="word",
-        level=1, flow="col", wrap=False, strectch=False,
-    ),
-    group=dict(
-        template="",
-        children="word",
-        level=1, flow="row", wrap=True, strectch=False,
-    ),
-    word=dict(
-        template=True,
-        featuresBare="pos posx",
-        features="lemma root formation tense",
-        base=True,
-        level=0, flow="col", wrap=False, strectch=False,
-    ),
+    manzil=dict(template="{otype} {number}", childrenPlain=False, children="aya",),
+    sajda=dict(template="{otype} {number}", childrenPlain=False, children="aya",),
+    juz=dict(template="{otype} {number}", childrenPlain=False, children="aya",),
+    ruku=dict(children="aya",),
+    hizb=dict(template="{otype} {number}", childrenPlain=False, children="aya",),
+    page=dict(template="{otype} {number}", childrenPlain=False, children="aya",),
+    lex=dict(template="{lemma}", lexTarget="word",),
+    group=dict(wrap=False,),
+    word=dict(featuresBare="pos posx", features="lemma root formation tense",),
 )
 
 INTERFACE_DEFAULTS = dict()
