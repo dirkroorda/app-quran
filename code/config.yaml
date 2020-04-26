@@ -1,0 +1,53 @@
+apiVersion: 1
+dataDisplay:
+  noneValues:
+  - none
+  - unknown
+  - null
+  - NA
+  sectionSep1: ':'
+  writing: ara
+docs:
+  docPage: features
+  featureBase: '{docBase}/features{docExt}'
+interfaceDefaults: {}
+provenanceSpec:
+  corpus: Quran
+  doi: 10.5281/zenodo.2532177
+  org: q-ran
+  repo: quran
+  version: '0.4'
+  webBase: http://tanzil.net
+  webHint: show this passage on Tanzil
+  webUrl: /#<1>:<2>
+typeDisplay:
+  group:
+    wrap: false
+  hizb:
+    children: aya
+    childrenPlain: false
+    template: '{otype} {number}'
+  juz:
+    children: aya
+    childrenPlain: false
+    template: '{otype} {number}'
+  lex:
+    lexOcc: word
+    template: '{lemma}'
+  manzil:
+    children: aya
+    childrenPlain: false
+    template: '{otype} {number}'
+  page:
+    children: aya
+    childrenPlain: false
+    template: '{otype} {number}'
+  ruku:
+    children: aya
+  sajda:
+    children: aya
+    childrenPlain: false
+    template: '{otype} {number}'
+  word:
+    features: lemma root formation tense
+    featuresBare: pos posx
