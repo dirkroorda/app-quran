@@ -6,7 +6,6 @@ dataDisplay:
   - null
   - NA
   sectionSep1: ':'
-  writing: ara
 docs:
   docPage: features
   featureBase: '{docBase}/features{docExt}'
@@ -51,3 +50,4 @@ typeDisplay:
   word:
     features: lemma root formation tense
     featuresBare: pos posx
+writing: ara
