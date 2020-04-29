@@ -25,28 +25,29 @@ typeDisplay:
   hizb:
     children: aya
     childrenPlain: false
-    template: '{otype} {number}'
+    label: '{otype} {number}'
   juz:
     children: aya
     childrenPlain: false
-    template: '{otype} {number}'
+    label: '{otype} {number}'
   lex:
     lexOcc: word
     template: '{lemma}'
+    label: '{lemma}'
   manzil:
     children: aya
     childrenPlain: false
-    template: '{otype} {number}'
+    label: '{otype} {number}'
   page:
     children: aya
     childrenPlain: false
-    template: '{otype} {number}'
+    label: '{otype} {number}'
   ruku:
     children: aya
   sajda:
     children: aya
     childrenPlain: false
-    template: '{otype} {number}'
+    label: '{otype} {number}'
   word:
     features: lemma root formation tense
     featuresBare: pos posx
