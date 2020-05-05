@@ -48,6 +48,8 @@ typeDisplay:
     children: aya
     childrenPlain: false
     label: '{otype} {number}'
+  aya:
+    children: group
   word:
     features: lemma root formation tense
     featuresBare: pos posx
