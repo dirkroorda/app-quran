@@ -6,6 +6,7 @@ dataDisplay:
   - null
   - NA
   sectionSep1: ':'
+  showVerseInTuple: true
 docs:
   docPage: features
   featureBase: '{docBase}/features{docExt}'
