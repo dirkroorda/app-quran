@@ -19,7 +19,7 @@ provenanceSpec:
   version: '0.4'
   webBase: http://tanzil.net
   webHint: show this passage on Tanzil
-  webUrl: /#<1>:<2>
+  webUrl: '{webBase}/#<1>:<2>'
 typeDisplay:
   group:
     wrap: false
