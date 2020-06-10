@@ -1,4 +1,4 @@
-apiVersion: 2
+apiVersion: 3
 dataDisplay:
   noneValues:
   - none
@@ -25,32 +25,34 @@ typeDisplay:
     wrap: false
   hizb:
     children: aya
-    childrenPlain: false
     label: '{otype} {number}'
+    template: '{number}'
   juz:
     children: aya
-    childrenPlain: false
     label: '{otype} {number}'
+    template: '{number}'
   lex:
     lexOcc: word
     template: '{lemma}'
     label: '{lemma}'
   manzil:
     children: aya
-    childrenPlain: false
     label: '{otype} {number}'
+    template: '{number}'
   page:
     children: aya
-    childrenPlain: false
     label: '{otype} {number}'
+    template: '{number}'
   ruku:
     children: aya
+    label: '{otype} {number}'
+    template: '{number}'
   sajda:
     children: aya
-    childrenPlain: false
     label: '{otype} {number}'
-  aya:
-    children: group
+    template: '{number}'
+  sura:
+    children: aya
   word:
     features: lemma root formation tense
     featuresBare: pos posx
