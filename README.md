@@ -15,8 +15,6 @@ for working with the
 Get started with the
 [tutorial](https://nbviewer.jupyter.org/github/annotation/tutorials/blob/master/quran/start.ipynb).
 
-It offers this [API](https://annotation.github.io/text-fabric/Api/App/).
-
 ![shot](images/shot.png)
 
 ![jup](images/jup.png)
